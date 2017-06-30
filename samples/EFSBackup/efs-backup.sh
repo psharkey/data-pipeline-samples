@@ -30,11 +30,12 @@ sudo mkdir /backup
 echo 'sudo mkdir /mnt/backups'
 sudo mkdir /mnt/backups
 echo "sudo mount -t nfs -o nfsvers=4.1 -o rsize=1048576 -o wsize=1048576 -o timeo=600 -o retrans=2 -o hard $source /backup"
-ls -la /backup
+sudo ls -la /backup
 sudo mount -t nfs -o nfsvers=4.1 -o rsize=1048576 -o wsize=1048576 -o timeo=600 -o retrans=2 -o hard $source /backup
 echo "sudo mount -t nfs -o nfsvers=4.1 -o rsize=1048576 -o wsize=1048576 -o timeo=600 -o retrans=2 -o hard $destination /mnt/backups"
 sudo mount -t nfs -o nfsvers=4.1 -o rsize=1048576 -o wsize=1048576 -o timeo=600 -o retrans=2 -o hard $destination /mnt/backups
-ls -la /mnt/backups
+sudo touch /mnt/backups/shell.txt
+sudo ls -la /mnt/backups
 
 # we need to decrement retain because we start counting with 0 and we need to remove the oldest backup
 let "retain=$retain-1"
@@ -78,4 +79,5 @@ echo "sudo cp /tmp/efs-backup.log /mnt/backups/efsbackup-logs/$efsid-`date +%Y%m
 sudo cp /tmp/efs-backup.log /mnt/backups/efsbackup-logs/$efsid-`date +%Y%m%d-%H%M`.log
 echo "sudo touch /mnt/backups/$efsid/$interval.0/"
 sudo touch /mnt/backups/$efsid/$interval.0/
+sudo ls -la /mnt/backups
 exit $rsyncStatus
